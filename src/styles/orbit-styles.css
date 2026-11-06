@@ -1,0 +1,44 @@
+/* ---------- Landing hero: orbiting module icons ---------- */
+.orbit-frame {
+  --o-bg: #ffffff; --o-surface: #f6f4f7; --o-line: #e4dfe8; --o-bar: #e4dfe8; --o-bar-2: #f1edf3;
+  --o-accent: #c94f86; --o-accent-line: #e9b7cf;
+  --o-grad: linear-gradient(135deg, #c94f86 0%, #b9a8f0 100%);
+  --o-shadow: 0 1px 2px rgba(30,10,40,.06), 0 8px 24px rgba(30,10,40,.10);
+  width: min(100%, 520px); aspect-ratio: 4 / 3; border-radius: 22px; overflow: hidden;
+  background: var(--o-surface); display: grid; place-items: center;
+  box-shadow: 0 30px 70px -20px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.08);
+}
+.orbit-win { width: 90%; height: 88%; display: flex; flex-direction: column; background: var(--o-bg); border-radius: 14px; box-shadow: var(--o-shadow); overflow: hidden; }
+.orbit-bar { display: flex; align-items: center; gap: 4px; padding: 8px 10px; border-bottom: 1px solid var(--o-line); flex: none; }
+.orbit-bar i { width: 7px; height: 7px; border-radius: 50%; background: var(--o-bar); }
+.orbit-bar i:first-child { background: #f4b6d2; }
+.orbit-url { margin-left: 8px; width: 40%; height: 7px; border-radius: 4px; background: var(--o-bar-2); }
+.orbit-page { position: relative; flex: 1; overflow: hidden; background: var(--o-bg); }
+.orbit-nav { position: absolute; top: 0; left: 0; right: 0; z-index: 3; display: flex; align-items: center; gap: 6px; padding: 10px 12px; }
+.orbit-nav b { width: 11px; height: 11px; border-radius: 3px; background: #0d0b10; }
+.orbit-nav span { width: 16px; height: 4px; border-radius: 2px; background: var(--o-bar); }
+.orbit-nav span:first-of-type { margin-left: auto; }
+.orbit-stage { position: absolute; left: 50%; top: 54%; height: 88%; aspect-ratio: 1; transform: translate(-50%, -50%); }
+.orbit-ring { position: absolute; border: 1px dashed var(--o-accent-line); border-radius: 50%; animation: orbit-spin var(--t) linear infinite; }
+.orbit-ring.r1 { inset: 24%; --t: 14s; }
+.orbit-ring.r2 { inset: 0; --t: 22s; animation-direction: reverse; }
+.orbit-item { position: absolute; inset: 0; transform: rotate(var(--a)); }
+.orbit-item i { position: absolute; left: 50%; top: 0; width: 28px; height: 28px; margin: -14px 0 0 -14px; border-radius: 9px;
+  background: var(--o-bg); border: 1px solid var(--o-line); box-shadow: var(--o-shadow); display: grid; place-items: center;
+  color: var(--o-accent); animation: orbit-counter var(--t) linear infinite; }
+.orbit-ring.r2 .orbit-item i { animation-direction: reverse; }
+.orbit-item svg { width: 15px; height: 15px; }
+.orbit-center { position: absolute; left: 50%; top: 50%; width: 17%; aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 30%;
+  background: var(--o-grad); display: grid; place-items: center; box-shadow: 0 10px 24px rgba(201,79,134,.35); }
+.orbit-center svg { width: 62%; height: auto; }
+.orbit-center::after { content: ""; position: absolute; inset: 0; border-radius: 30%; border: 2px solid var(--o-accent); animation: orbit-pulse 2.6s ease-out infinite; }
+@keyframes orbit-spin { to { transform: rotate(360deg); } }
+@keyframes orbit-counter { from { transform: rotate(var(--na)); } to { transform: rotate(calc(var(--na) - 360deg)); } }
+@keyframes orbit-pulse { from { transform: scale(1); opacity: .5; } to { transform: scale(2.2); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .orbit-ring, .orbit-item i, .orbit-center::after { animation: none; }
+}
+/* Chips float over the light orbit frame, so give them a dark backing */
+.hero-visual .hero-chip { background: rgba(13, 11, 16, .92); border-color: rgba(255,255,255,.14); z-index: 2; }
+.hero-visual .hero-chip.c1 { left: -12px; top: 6%; }
+.hero-visual .hero-chip.c2 { right: -12px; bottom: 6%; }
