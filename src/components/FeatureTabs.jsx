@@ -1,5 +1,4 @@
-// Module tabs for the landing page "Everything in one system" section.
-// Based on "Feature tabs" from the BrewedOps Motion Library, adapted for Hope, Inc.
+
 import { useEffect, useRef, useState } from 'react';
 import '../styles/feature-tabs.css';
 
@@ -34,7 +33,7 @@ const TABS = [
 
 const AUTO_MS = 5000;
 
-/* Small illustrations, one per module */
+
 function Preview({ id }) {
   if (id === 'customers') {
     return (
@@ -89,7 +88,7 @@ export default function FeatureTabs() {
   const tabRefs = useRef([]);
   const reduced = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Moves to the next tab every few seconds, unless the visitor is hovering, focused or prefers less motion
+  
   useEffect(() => {
     if (paused || reduced) return undefined;
     const t = setTimeout(() => setK(x => (x + 1) % TABS.length), AUTO_MS);

@@ -5,7 +5,7 @@ import { useData } from '../context/DataContext';
 import { ICONS } from './icons';
 import { Logo, Loading, Alert } from './ui';
 
-// Sidebar items. "right" hides an item from Users without that right.
+
 export const NAV = [
   { to: '/dashboard', id: 'dashboard', label: 'Dashboard', title: 'Dashboard' },
   { section: 'Modules' },

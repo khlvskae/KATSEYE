@@ -1,4 +1,4 @@
-/* ---------- Landing page: module feature tabs ---------- */
+
 .ft {
   --ft-accent: var(--pink-deep, #c94f86);
   --ft-accent-soft: #fbe9f1;
@@ -16,7 +16,7 @@
   .ft { --ft-spring: linear(0, .0941 5.6%, .2736 11.1%, .4548 16.7%, .6076 22.2%, .7255 27.8%, .8119 33.3%, .8732 38.9%, .9156 44.4%, .9444 50%, .9636 55.6%, .9764 61.1%, .9848 66.7%, .9902 72.2%, .9938 77.8%, .996 83.3%, .9975 88.9%, .9984 94.4%, 1 100%); }
 }
 
-/* Tabs */
+
 .ft-tabs { display: grid; align-content: start; gap: 8px; }
 .ft-tab {
   position: relative; display: flex; align-items: center; gap: 14px; width: 100%;
@@ -34,13 +34,13 @@
 .ft-tab-text b { font: 800 1.2rem/1.1 var(--display); letter-spacing: -.02em; }
 .ft-tab:focus-visible { outline: 2px solid var(--ft-accent); outline-offset: 2px; }
 
-/* Progress line under the active tab (shows when it will move on) */
+
 .ft-progress { position: absolute; left: 18px; right: 18px; bottom: 0; height: 2px; border-radius: 2px; background: var(--ft-accent);
   transform: scaleX(0); transform-origin: left; animation: ft-progress var(--auto) linear forwards; }
 .ft-paused .ft-progress { animation: none; transform: scaleX(1); opacity: .35; }
 @keyframes ft-progress { to { transform: scaleX(1); } }
 
-/* Panel */
+
 .ft-panel { display: grid; grid-template-rows: 1fr auto; border-radius: 24px; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--ft-shadow); overflow: hidden; min-height: 360px; min-width: 0; }
 .ft-preview { position: relative; padding: 28px; background: radial-gradient(120% 90% at 100% 0%, #f7eef5 0%, var(--surface) 55%); display: grid; align-content: center; animation: ft-in 600ms var(--ft-spring) both; min-width: 0; }
 .ft-copy { padding: 20px 28px 26px; border-top: 1px solid var(--border); animation: ft-in 500ms var(--ft-spring) 60ms both; }
@@ -49,7 +49,7 @@
 @keyframes ft-in { from { opacity: 0; transform: scale(.97) translateY(6px); } to { opacity: 1; transform: none; } }
 @keyframes ft-rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
-/* Customers preview */
+
 .ft-rows { display: grid; gap: 10px; }
 .ft-row { display: grid; grid-template-columns: 34px 1fr auto auto; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 14px; background: var(--surface); border: 1px solid var(--border); animation: ft-rise 500ms var(--ft-spring) var(--d) both; }
 .ft-avatar { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(150deg, var(--ft-accent-soft), var(--ft-accent-line)); }
@@ -61,7 +61,7 @@
 .ft-code { font: 600 .78rem var(--body); color: var(--text-muted); font-variant-numeric: tabular-nums; }
 .ft-chip { font: 700 .66rem/1 var(--body); letter-spacing: .08em; padding: 5px 9px; border-radius: 999px; background: var(--ft-accent-soft); color: var(--ft-accent); }
 
-/* Products preview */
+
 .ft-chart-wrap { display: grid; gap: 16px; }
 .ft-chart { height: 190px; display: flex; align-items: flex-end; gap: 12px; padding: 0 4px; border-bottom: 1px solid var(--border); }
 .ft-chart u { flex: 1; height: var(--h); border-radius: 8px 8px 3px 3px; background: var(--ft-accent-line); transform-origin: bottom; animation: ft-grow 700ms var(--ft-spring) var(--d) both; }
@@ -70,7 +70,7 @@
 .ft-caption { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; font-size: .85rem; color: var(--text-muted); }
 .ft-caption b { color: var(--text); font-variant-numeric: tabular-nums; }
 
-/* People preview */
+
 .ft-timeline { display: grid; gap: 4px; position: relative; padding-left: 8px; }
 .ft-timeline::before { content: ""; position: absolute; left: 15px; top: 14px; bottom: 14px; width: 2px; background: var(--ft-accent-line); border-radius: 2px; }
 .ft-step { position: relative; display: flex; align-items: center; gap: 16px; padding: 10px 0; animation: ft-rise 500ms var(--ft-spring) var(--d) both; }
@@ -80,7 +80,7 @@
 .ft-step-body b { font-weight: 700; }
 .ft-step-body small { color: var(--text-muted); font-variant-numeric: tabular-nums; }
 
-/* Sales preview */
+
 .ft-receipt { display: grid; gap: 8px; padding: 18px 20px; border-radius: 16px; background: var(--surface); border: 1px solid var(--border); }
 .ft-receipt-head { display: flex; justify-content: space-between; align-items: center; padding-bottom: 8px; border-bottom: 1px dashed var(--border); }
 .ft-receipt-head b { font: 800 1rem var(--display); letter-spacing: .02em; }
@@ -91,7 +91,7 @@
 .ft-total { display: flex; justify-content: space-between; padding-top: 10px; border-top: 1px solid var(--border); font-weight: 700; }
 .ft-total b { font: 800 1.2rem var(--display); background: var(--ft-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
-/* Phones: tabs become a 2 × 2 grid above the panel */
+
 @media (max-width: 760px) {
   .ft { grid-template-columns: 1fr; }
   .ft-tabs { grid-template-columns: 1fr 1fr; }

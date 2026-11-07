@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { passwordStrength } from '../lib/format';
 import logoPhoto from '../assets/logo.jpeg';
 
-/* ---------- Brand ---------- */
+
 export function EyeMark() {
   return (
     <svg viewBox="0 0 26 16" aria-hidden="true" width="26" height="16">
@@ -24,7 +24,7 @@ export function Logo({ word = true }) {
   );
 }
 
-// The chrome cat-eye artwork used on the landing and account pages
+
 export function EyeArt({ className = 'eye-art' }) {
   return (
     <svg className={className} viewBox="0 0 520 340" aria-hidden="true">
@@ -54,7 +54,7 @@ export function EyeArt({ className = 'eye-art' }) {
   );
 }
 
-/* ---------- Feedback ---------- */
+
 export function Alert({ kind = 'error', children }) {
   if (!children) return null;
   return <div className={`alert alert-${kind === 'ok' ? 'success' : kind === 'info' ? 'info' : 'error'}`} role="alert">{children}</div>;
@@ -74,7 +74,7 @@ export function EmptyRow({ cols, children }) {
   return <tr><td colSpan={cols}><div className="empty-state">{children}</div></td></tr>;
 }
 
-/* ---------- Forms ---------- */
+
 export function Field({ label, htmlFor, error, children }) {
   return (
     <div className="form-group">
@@ -116,7 +116,7 @@ export function StrengthMeter({ password }) {
   );
 }
 
-/* ---------- Modal ---------- */
+
 export function Modal({ title, sub, onClose, size = '', children }) {
   useEffect(() => {
     const onKey = e => { if (e.key === 'Escape' && onClose) onClose(); };
@@ -146,7 +146,7 @@ export function FormButtons({ saving, label = 'Save', onCancel }) {
   );
 }
 
-/* ---------- Lists ---------- */
+
 export function FilterTabs({ value, onChange, options }) {
   return (
     <div className="filter-tabs" role="tablist">
@@ -160,7 +160,7 @@ export function FilterTabs({ value, onChange, options }) {
   );
 }
 
-// Active / Deleted / All filter + text search over the given fields
+
 export function useList(rows, searchFields) {
   const [filter, setFilter] = useState('active');
   const [search, setSearch] = useState('');
@@ -192,7 +192,7 @@ export function SearchBox({ value, onChange, placeholder }) {
     aria-label={placeholder} onChange={e => onChange(e.target.value)} />;
 }
 
-// Edit / Delete / Restore buttons, shown according to rights
+
 export function RowActions({ row, canEdit, canDelete, onEdit, onDelete, onRestore, children }) {
   const buttons = [];
   if (children) buttons.push(children);
@@ -202,7 +202,7 @@ export function RowActions({ row, canEdit, canDelete, onEdit, onDelete, onRestor
   return <div className="action-btns">{buttons.length ? buttons : '—'}</div>;
 }
 
-// Confirmation step built into the page (browsers' confirm() is not used)
+
 export function ConfirmModal({ title, message, confirmLabel = 'Delete', onConfirm, onClose }) {
   const [busy, setBusy] = useState(false);
   return (
