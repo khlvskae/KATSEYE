@@ -5,7 +5,7 @@ import { visibleNav } from '../components/Layout';
 import { ICONS } from '../components/icons';
 import { saleTotal, salePaid } from '../lib/format';
 
-// $688935 → $688.9k, $1250000 → $1.3M
+
 const compact = n => n >= 1e6 ? `$${(n / 1e6).toFixed(1)}M` : n >= 1e3 ? `$${(n / 1e3).toFixed(1)}k` : `$${n.toFixed(2)}`;
 
 const ROLE_TEXT = {
@@ -28,7 +28,6 @@ export default function Dashboard() {
     { label: 'Products', show: auth.can('products.view'), value: active(d.products).length, note: `${active(d.prices).length} price records` },
     { label: 'Sales', show: auth.can('sales.view'), value: active(d.sales).length, note: `${active(d.sDetails).length} line items` },
     { label: 'Total Revenue', show: auth.can('sales.view'), value: compact(revenue), note: `${compact(collected)} collected · ${compact(Math.max(0, revenue - collected))} outstanding` },
-    { label: 'Active Employees', show: auth.can('hr.view'), value: active(d.employees).filter(e => !e.sepDate).length, note: `${active(d.employees).filter(e => e.sepDate).length} separated` },
   ].filter(s => s.show);
   const shortcuts = visibleNav(auth).filter(i => !i.section && i.id !== 'dashboard');
 
