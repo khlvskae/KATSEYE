@@ -324,9 +324,12 @@ function JobHistoryForm({ row, original, employee, existing, onClose }) {
     if (!f.deptCode) fe.deptCode = 'Choose a department.';
     if (!f.effDate) fe.effDate = 'Choose the effective date.';
     if (!(Number(f.salary) >= 0) || f.salary === '') fe.salary = 'Enter a salary of zero or more.';
-    const clash = existing.some(h => h.empNo === employee.empNo && h.jobCode === f.jobCode && h.effDate === f.effDate
+    // One job change per employee per day (the database enforces this too)
+    const clash = existing.some(h => h.empNo === employee.empNo && h.effDate === f.effDate && !h.isDeleted
       && !(original && h.jobCode === original.jobCode && h.effDate === original.effDate));
-    if (clash) fe.effDate = 'This employee already has this job on that date.';
+    if (clash) fe.effDate = 'This employee already has a job change on that date. Edit that entry instead.';
+    else if (f.effDate && employee.hireDate && f.effDate < employee.hireDate) fe.effDate = `The date cannot be before the hire date (${employee.hireDate}).`;
+    else if (f.effDate && employee.sepDate && f.effDate > employee.sepDate) fe.effDate = `The date cannot be after the separation date (${employee.sepDate}).`;
     setErrors(fe); setError('');
     if (Object.keys(fe).length) return;
     setSaving(true);
