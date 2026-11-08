@@ -1,6 +1,6 @@
 import { Logo } from '../components/ui';
 
-// Shown until the .env file has your Supabase URL and key
+
 export default function SetupNotice() {
   return (
     <div className="auth-page">
