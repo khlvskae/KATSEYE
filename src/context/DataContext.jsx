@@ -7,7 +7,7 @@ import { useToast } from './ToastContext';
 const DataContext = createContext(null);
 const EMPTY = Object.fromEntries(Object.keys(TABLES).map(k => [k, []]));
 
-// Supabase returns at most 1,000 rows per request, so ask in pages.
+
 async function fetchTable(name) {
   const T = TABLES[name], rows = [];
   for (let from = 0; ; from += 1000) {
@@ -52,8 +52,7 @@ export function DataProvider({ children }) {
     if (status === 'signedOut') setData(EMPTY);
   }, [status, loadAll]);
 
-  // Adds a row, or updates it when "original" (the row before editing) is given.
-  // Returns an error message, or null when saved.
+  
   const saveRow = useCallback(async (name, row, original = null) => {
     const T = TABLES[name];
     const payload = T.toDb(row);
@@ -66,7 +65,7 @@ export function DataProvider({ children }) {
     return null;
   }, [reload, toast]);
 
-  // Soft delete (true) or restore (false)
+  
   const setDeleted = useCallback(async (name, row, deleted) => {
     const T = TABLES[name];
     const { error } = await matchKeys(supabase.from(T.table).update({ is_deleted: deleted }), name, T.toDb(row));

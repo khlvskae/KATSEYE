@@ -16,7 +16,7 @@ import Users from './pages/Users';
 import AuditLog from './pages/AuditLog';
 import SetupNotice from './pages/SetupNotice';
 
-// Signed-in only. Optional: a right, admin-only, or superadmin-only.
+
 function Protected({ right, admin, superOnly, children }) {
   const auth = useAuth();
   if (auth.status === 'loading') return <Loading text="Checking your session…" />;
@@ -27,7 +27,7 @@ function Protected({ right, admin, superOnly, children }) {
   return children;
 }
 
-// Signed-out only (login, register, forgot password)
+
 function PublicOnly({ children }) {
   const { status } = useAuth();
   if (status === 'loading') return <Loading text="Checking your session…" />;

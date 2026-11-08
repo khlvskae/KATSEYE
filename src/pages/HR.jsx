@@ -20,7 +20,7 @@ export default function HR() {
   );
 }
 
-/* ---------------- Employees ---------------- */
+
 const EMP_SEARCH = ['empNo', 'lastName', 'firstName', r => `${r.firstName} ${r.lastName}`];
 
 function Employees() {
@@ -150,7 +150,7 @@ function EmployeeForm({ row, original, existing, onClose }) {
   );
 }
 
-/* ---------------- Jobs and Departments ---------------- */
+
 const KINDS = {
   jobs: {
     title: 'Jobs', one: 'Job', code: 'jobCode', name: 'jobDesc', codeLabel: 'Job Code', nameLabel: 'Job Description',
@@ -257,7 +257,7 @@ function SimpleForm({ K, kind, row, original, existing, onClose }) {
   );
 }
 
-/* ---------------- Job history ---------------- */
+
 function JobHistory({ employee, onClose }) {
   const { can } = useAuth();
   const { jobHist, jobs, depts, setDeleted } = useData();

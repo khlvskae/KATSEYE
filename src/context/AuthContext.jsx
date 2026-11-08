@@ -4,7 +4,7 @@ import { randomPassword } from '../lib/format';
 
 const AuthContext = createContext(null);
 
-// Turns an app_user row + permission rows into the signed-in user object.
+
 export function mapUser(u, permRows = []) {
   const perms = {};
   permRows.filter(p => p.user_id === u.id).forEach(p => { perms[p.right_code] = true; });
@@ -16,7 +16,7 @@ export function mapUser(u, permRows = []) {
 }
 
 export function AuthProvider({ children }) {
-  // status: loading | signedOut | signedIn | setPassword
+  
   const [status, setStatus] = useState(SUPABASE_READY ? 'loading' : 'signedOut');
   const [user, setUser] = useState(null);
   const [notice, setNotice] = useState('');           // message for the login page
@@ -24,7 +24,7 @@ export function AuthProvider({ children }) {
   const userRef = useRef(null);
   userRef.current = user;
 
-  // Loads the person's Hope, Inc. account. Returns a reason when they cannot enter.
+  
   const enterApp = useCallback(async authUser => {
     const { data: p, error } = await supabase.from('app_user').select('*').eq('id', authUser.id).maybeSingle();
     if (error) throw error;
@@ -46,7 +46,7 @@ export function AuthProvider({ children }) {
     return null;
   }, []);
 
-  // Start-up: finish an emailed link, or restore a saved session
+  
   useEffect(() => {
     if (!SUPABASE_READY) return undefined;
     let cancelled = false;
