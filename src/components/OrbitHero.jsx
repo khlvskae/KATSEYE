@@ -5,7 +5,7 @@ const Icon = ({ children }) => (
   </svg>
 );
 
-// Inner ring: 3 icons, outer ring: 4 icons
+
 const INNER = [
   { a: 0, label: 'Customers', icon: <Icon><circle cx="9" cy="8" r="3.5" /><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5" /><path d="M16 4.5a3.5 3.5 0 0 1 0 7" /></Icon> },
   { a: 120, label: 'Products', icon: <Icon><path d="M3.5 7.5 12 3l8.5 4.5v9L12 21l-8.5-4.5z" /><path d="M3.5 7.5 12 12l8.5-4.5M12 12v9" /></Icon> },

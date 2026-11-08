@@ -1,0 +1,62 @@
+[
+  {
+    "id": "S1-TST-01",
+    "sprint": 1,
+    "week": "1",
+    "role": "Tester",
+    "assignee": "Villanueva",
+    "task": "Sprint 1 test plan and acceptance criteria",
+    "due_day": "3",
+    "sheet_status": "PASSED"
+  },
+  {
+    "id": "S1-TST-02",
+    "sprint": 1,
+    "week": "2",
+    "role": "Tester",
+    "assignee": "Villanueva",
+    "task": "Test cases: register, login and logout, set and reset password",
+    "due_day": "3",
+    "sheet_status": "PASSED"
+  },
+  {
+    "id": "S1-TST-03",
+    "sprint": 1,
+    "week": "2",
+    "role": "Tester",
+    "assignee": "Villanueva",
+    "task": "Test cases User Management (add, edit, block/unblock, approve)",
+    "due_day": "3",
+    "sheet_status": "PASSED"
+  },
+  {
+    "id": "S1-TST-04",
+    "sprint": 1,
+    "week": "2",
+    "role": "Tester",
+    "assignee": "Villanueva",
+    "task": "Permission matrix tests (superadmin/admin/user x each right)",
+    "due_day": "3",
+    "sheet_status": "PASSED"
+  },
+  {
+    "id": "S1-TST-05",
+    "sprint": 1,
+    "week": "2",
+    "role": "Tester",
+    "assignee": "Villanueva",
+    "task": "Automated smoke test: login and main page navigation",
+    "due_day": "3",
+    "sheet_status": "PASSED"
+  },
+  {
+    "id": "S1-TST-06",
+    "sprint": 1,
+    "week": "2",
+    "role": "Tester",
+    "assignee": "Villanueva",
+    "task": "Bug reports and fix verification",
+    "due_day": "3",
+    "sheet_status": "PASSED"
+  }
+]

@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { Alert, Field, Loading, Logo, PasswordInput, StrengthMeter } from '../components/ui';
 import { isEmail } from '../lib/format';
 
-// Shared two-column layout for every account page
+
 function AuthLayout({ eyebrow, heading, children }) {
   return (
     <div className="auth-page">
@@ -145,7 +145,7 @@ export function ForgotPassword() {
     setBusy(true);
     const err = await sendPasswordLink(email.trim());
     setBusy(false);
-    // Same message whether or not the account exists; only rate limits are reported
+    
     if (err && /Too many/.test(err)) setError(err);
     else { setSent(true); setEmail(''); }
   }
@@ -168,7 +168,7 @@ export function ForgotPassword() {
   );
 }
 
-// Reached from an invite, approval or reset email
+
 export function SetPassword() {
   const { status, linkEmail, setPassword } = useAuth();
   const navigate = useNavigate();

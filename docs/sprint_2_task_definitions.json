@@ -1,0 +1,62 @@
+[
+  {
+    "id": "S2-TST-01",
+    "sprint": 2,
+    "week": "3",
+    "role": "Tester",
+    "assignee": "Villanueva",
+    "task": "Test cases: add, edit, and search customer records",
+    "due_day": "3",
+    "sheet_status": "PASSED"
+  },
+  {
+    "id": "S2-TST-02",
+    "sprint": 2,
+    "week": "3",
+    "role": "Tester",
+    "assignee": "Villanueva",
+    "task": "Test cases: pay terms selection and soft delete customer",
+    "due_day": "4",
+    "sheet_status": "PASSED"
+  },
+  {
+    "id": "S2-TST-03",
+    "sprint": 2,
+    "week": "3",
+    "role": "Tester",
+    "assignee": "Villanueva",
+    "task": "Test cases: active, deleted, and all customer view tabs",
+    "due_day": "5",
+    "sheet_status": "PASSED"
+  },
+  {
+    "id": "S2-TST-04",
+    "sprint": 2,
+    "week": "3",
+    "role": "Tester",
+    "assignee": "Villanueva",
+    "task": "Test cases: add, edit, search products with prices as of date",
+    "due_day": "5",
+    "sheet_status": "PASSED"
+  },
+  {
+    "id": "S2-TST-05",
+    "sprint": 2,
+    "week": "3",
+    "role": "Tester",
+    "assignee": "Villanueva",
+    "task": "Test cases: product tabs and soft delete verification",
+    "due_day": "6",
+    "sheet_status": "PASSED"
+  },
+  {
+    "id": "S2-TST-06",
+    "sprint": 2,
+    "week": "3",
+    "role": "Tester",
+    "assignee": "Villanueva",
+    "task": "Sprint 2 test sign-off report summary",
+    "due_day": "7",
+    "sheet_status": "PASSED"
+  }
+]
