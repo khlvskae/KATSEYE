@@ -1,70 +1,98 @@
-# Hope, Inc. ERP: database
+# Hope, Inc. ERP – Database
 
-PostgreSQL on Supabase. Everything that builds the database lives here, in run order.
+**Prepared by:** Khrisz Cortez, Database Administrator
+**Course:** Information Management
+**Database:** PostgreSQL (Supabase)
 
-```
-database/
-├── migrate.sh                    runs everything in order
-├── migrations/                   database changes, run once each, in number order
-│   ├── 01_tables.sql             professor's HopeDB_audit.sql (tables + data)
-│   ├── 02_users_and_rights.sql   accounts, roles, modules, rights
-│   ├── 03_password_reset.sql     reset tokens
-│   ├── 04_audit_user.sql         audit log shows who is signed in
-│   ├── 05_security.sql           who can read / add / edit / delete
-│   ├── 06_hr.sql                 Sprint 3: HR views, job history rules, indexes
-│   └── 07_sales_and_reports.sql  Sprint 4: sales totals, balances, reports
-├── seeds/
-│   ├── 01_roles_and_rights.sql   default roles, modules, rights
-│   ├── 02_admins.sql             team superadmins
-│   └── demo/hr_sample_data.sql   sample HR data (only with --demo)
-├── tests/                        each file prints PASS/FAIL and changes nothing
-│   ├── test_audit.sql            test_password_reset.sql
-│   ├── test_job_history.sql      test_reports.sql
-│   └── check_hr_delete.sql       check_sales_delete.sql
-├── scripts/backup.sh, restore.sh
-├── docs/DATABASE.md              design notes + review checklist
-└── dist/hope-all-in-one.sql      everything in one file, for the SQL Editor
-```
+## Overview
 
-`TASKS.md` in this folder maps every DB Admin task ID to its file and lines.
+This folder contains all the SQL files used to build the Hope, Inc. ERP database. The base
+tables and sample data come from our professor's `HopeDB_audit.sql` script. On top of that,
+we added user accounts, access rights, and the queries needed for Sprints 2 to 4.
 
-## Setup (no Docker)
+## Folder Structure
 
-1. Install the PostgreSQL client, version 17 or newer:
-   - Mac: `brew install postgresql@17`, then run the `echo 'export PATH=…'` line brew prints
-   - Windows: install PostgreSQL from postgresql.org, tick **Command Line Tools**, and run the scripts in **Git Bash**
-2. Get your connection string from Supabase → **Connect** → **Session pooler**, and put your database password in it.
-3. Run:
-   ```bash
-   cd database
-   export HOPE_DB_URL='postgresql://postgres.xxxx:PASSWORD@aws-0-xx.pooler.supabase.com:5432/postgres'
-   ./migrate.sh            # build or update the database
-   ./migrate.sh --test     # every test should say PASS
-   ```
-
-| Command | What it does |
+| File / Folder | Description |
 |---|---|
-| `./migrate.sh` | Applies any new migrations (each in one transaction), then the seeds |
-| `./migrate.sh --status` | Lists applied / pending migrations, and flags any edited after applying |
-| `./migrate.sh --demo` | Also loads `seeds/demo/` |
-| `./migrate.sh --test` | Runs `tests/`; exits with an error if any row says FAIL |
-| `./migrate.sh --rebuild` | **Wipes** the public schema and builds from 01 (asks you to type REBUILD) |
-| `./migrate.sh --bundle` | Writes `dist/hope-all-in-one.sql` (no database needed) |
-| `scripts/backup.sh` | Saves `backups/hope-YYYYMMDD-HHMM.dump` |
-| `scripts/restore.sh <file>` | Restores a backup (asks you to type RESTORE) |
+| `migrations/` | SQL files that build the database, run in number order (01 to 08) |
+| `seeds/` | Starting data: roles, modules, rights, and team accounts |
+| `seeds/demo/` | Sample customers, products, and employees for testing |
+| `tests/` | Test scripts that show PASS or FAIL for each feature |
+| `scripts/` | Backup and restore scripts |
+| `dist/hope-all-in-one.sql` | All migrations and seeds combined into one file |
+| `docs/DATABASE.md` | Database documentation |
+| `TASKS.md` | List of DB Admin tasks and where to find the code for each |
+| `migrate.sh` | Script that runs the migrations and seeds in the correct order |
 
-### Without the command line
+### Migration Files
 
-On a **new, empty** Supabase project, open **SQL Editor**, paste all of `dist/hope-all-in-one.sql`, and click **Run**. Then run each file in `tests/` the same way.
+| File | Sprint | Description |
+|---|---|---|
+| `01_tables.sql` | 1 | Base tables, sample data, audit log, and soft delete (professor's script) |
+| `02_users_and_rights.sql` | 1 | User accounts, roles, modules, and rights |
+| `03_password_reset.sql` | 1 | Password reset tokens |
+| `04_audit_user.sql` | 1 | Records the logged-in user in the audit log |
+| `05_security.sql` | 1 | Permission checks for viewing, adding, editing, and deleting |
+| `06_hr.sql` | 3 | HR views, job history rules, and indexes |
+| `07_sales_and_reports.sql` | 4 | Sales totals, payment balances, reports, and audit log search |
+| `08_customer_product.sql` | 2 | Customer and product search indexes |
 
-### Team superadmins (no passwords in the repo)
+The number at the start of each file name sets the order in which the files are run.
+The tables must be created first, so the order should not be changed.
 
-1. Supabase → Authentication → Users → **Invite user** for each team member.
-2. Put the emails in `seeds/02_admins.sql`.
-3. Run `./migrate.sh` again. The result lists each email as `superadmin` or `not invited yet`.
+## Setup
 
-## Rules for changing the database
+### Option 1: Supabase SQL Editor
 
-- Never edit a migration that has already been applied. Add a new `08_something.sql` instead. `--status` shows `CHANGED` if someone did.
-- Never commit `HOPE_DB_URL`, passwords, the service_role key or `backups/`.
-- Run `./migrate.sh --test` before you push.
+1. Open the Supabase project and go to **SQL Editor**.
+2. Copy the contents of `dist/hope-all-in-one.sql`, paste them into a new query, and click **Run**.
+3. Run each file in the `tests` folder to check the setup. All rows should show **PASS**.
+
+> **Note:** This option re-creates the tables and resets the business data to the sample data.
+> Use it only on a new project or when a full reset is intended.
+
+### Option 2: Migration Script
+
+This option requires the PostgreSQL command-line tool (`psql`).
+
+- **Mac:** `brew install postgresql@17`
+- **Windows:** Install PostgreSQL from postgresql.org, select **Command Line Tools**, and use **Git Bash**.
+
+Copy the connection string from Supabase → **Connect** → **Session pooler**, then run:
+
+```bash
+cd database
+export HOPE_DB_URL='postgresql://postgres.xxxx:PASSWORD@aws-0-xx.pooler.supabase.com:5432/postgres'
+./migrate.sh           # builds or updates the database
+./migrate.sh --test    # runs all tests
+```
+
+| Command | Description |
+|---|---|
+| `./migrate.sh` | Runs any new migration files, then the seeds |
+| `./migrate.sh --status` | Shows which migration files have already been run |
+| `./migrate.sh --demo` | Also loads the sample data in `seeds/demo` |
+| `./migrate.sh --test` | Runs all test files |
+| `./migrate.sh --rebuild` | Deletes and rebuilds the whole database (asks for confirmation) |
+| `./migrate.sh --bundle` | Creates a new `dist/hope-all-in-one.sql` |
+| `scripts/backup.sh` | Saves a backup of the database |
+| `scripts/restore.sh <file>` | Restores the database from a backup |
+
+## Team Accounts
+
+| Role | Members |
+|---|---|
+| Superadmin | Khrisz Cortez |
+| Admin | Ylthea Villanueva, Ashley Dobles, Norminah Pampa, Zyrian Acorda |
+
+Passwords are not stored in any SQL file. To add the team accounts:
+
+1. In Supabase, go to **Authentication → Users → Invite user** and invite each member.
+2. Each member opens the email invitation and sets their own password.
+3. Run `seeds/02_admins.sql` to assign the roles.
+
+## Guidelines
+
+- Do not edit a migration file that has already been run. Create a new file instead (for example, `09_new_change.sql`).
+- Do not upload passwords, the `.env` file, or backup files to GitHub.
+- Run the tests before pushing any changes.
