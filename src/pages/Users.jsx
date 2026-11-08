@@ -21,7 +21,7 @@ export default function Users() {
   const [editing, setEditing] = useState(null);
   const [rightsFor, setRightsFor] = useState(null);
 
-  // The database only returns the accounts this person may see (admins never see superadmins)
+  
   const load = useCallback(async () => {
     const [a, b] = await Promise.all([
       supabase.from('app_user').select('*').eq('is_deleted', false).order('last_name'),
@@ -42,7 +42,7 @@ export default function Users() {
     return null;
   }
 
-  // Approving a pending user emails them a link to set their password
+  
   async function changeStatus(u, status) {
     const err = await saveUser(u, { status });
     if (err) return toast(err, true);
