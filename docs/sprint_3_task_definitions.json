@@ -1,0 +1,62 @@
+[
+  {
+    "id": "S3-TST-01",
+    "sprint": 3,
+    "week": "5",
+    "role": "Tester",
+    "assignee": "Villanueva",
+    "task": "Test cases: department and job",
+    "due_day": "3",
+    "sheet_status": "PASSED"
+  },
+  {
+    "id": "S3-TST-02",
+    "sprint": 3,
+    "week": "5",
+    "role": "Tester",
+    "assignee": "Villanueva",
+    "task": "Test cases: employee",
+    "due_day": "5",
+    "sheet_status": "PASSED"
+  },
+  {
+    "id": "S3-TST-03",
+    "sprint": 3,
+    "week": "5",
+    "role": "Tester",
+    "assignee": "Villanueva",
+    "task": "Job history tests (effective date, salary)",
+    "due_day": "7",
+    "sheet_status": "PASSED"
+  },
+  {
+    "id": "S3-TST-04",
+    "sprint": 3,
+    "week": "5",
+    "role": "Tester",
+    "assignee": "Villanueva",
+    "task": "Salary visibility and HR per-right permission tests",
+    "due_day": "8",
+    "sheet_status": "PASSED"
+  },
+  {
+    "id": "S3-TST-05",
+    "sprint": 3,
+    "week": "5",
+    "role": "Tester",
+    "assignee": "Villanueva",
+    "task": "Regression test of Sprints 1-2",
+    "due_day": "9",
+    "sheet_status": "PASSED"
+  },
+  {
+    "id": "S3-TST-06",
+    "sprint": 3,
+    "week": "5",
+    "role": "Tester",
+    "assignee": "Villanueva",
+    "task": "Bug reports and fix verification",
+    "due_day": "9",
+    "sheet_status": "PASSED"
+  }
+]
