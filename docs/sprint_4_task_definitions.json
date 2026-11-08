@@ -1,0 +1,62 @@
+[
+  {
+    "id": "S4-TST-01",
+    "sprint": 4,
+    "week": "7",
+    "role": "Tester",
+    "assignee": "Villanueva",
+    "task": "Test cases: sales transaction and price-as-of-date",
+    "due_day": "5",
+    "sheet_status": "PASSED"
+  },
+  {
+    "id": "S4-TST-02",
+    "sprint": 4,
+    "week": "8",
+    "role": "Tester",
+    "assignee": "Villanueva",
+    "task": "Payment and balance tests",
+    "due_day": "7",
+    "sheet_status": "PASSED"
+  },
+  {
+    "id": "S4-TST-03",
+    "sprint": 4,
+    "week": "8",
+    "role": "Tester",
+    "assignee": "Villanueva",
+    "task": "Report tests: all seven reports (date range, Top N, per-report rights, export)",
+    "due_day": "8",
+    "sheet_status": "PASSED"
+  },
+  {
+    "id": "S4-TST-04",
+    "sprint": 4,
+    "week": "8",
+    "role": "Tester",
+    "assignee": "Villanueva",
+    "task": "End-to-end test: register, approve, assign rights, login, sell, pay, run reports",
+    "due_day": "8",
+    "sheet_status": "PASSED"
+  },
+  {
+    "id": "S4-TST-05",
+    "sprint": 4,
+    "week": "8",
+    "role": "Tester",
+    "assignee": "Villanueva",
+    "task": "Full regression across all modules",
+    "due_day": "9",
+    "sheet_status": "PASSED"
+  },
+  {
+    "id": "S4-TST-06",
+    "sprint": 4,
+    "week": "8",
+    "role": "Tester",
+    "assignee": "Villanueva",
+    "task": "Final test sign-off report",
+    "due_day": "9",
+    "sheet_status": "PASSED"
+  }
+]
