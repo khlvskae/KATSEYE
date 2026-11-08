@@ -19,7 +19,7 @@ export default function Dashboard() {
   const d = useData();
   const active = list => list.filter(r => !r.isDeleted);
 
-  // Revenue: every active sale's lines × the price on its sales date, and what has been paid
+ 
   const activeSales = active(d.sales);
   const revenue = activeSales.reduce((sum, s) => sum + saleTotal(s, d.sDetails, d.prices), 0);
   const collected = activeSales.reduce((sum, s) => sum + salePaid(s.transNo, d.payments), 0);
@@ -34,7 +34,7 @@ export default function Dashboard() {
   return (
     <>
       <div className="welcome-msg">
-        <h2>Welcome back, <span className="serif" style={{ color: 'var(--pink)' }}>{auth.user.firstName || auth.user.name}.</span></h2>
+        <h2>Welcome Back, <span className="serif" style={{ color: 'var(--pink)' }}>{auth.user.firstName || auth.user.name}.</span></h2>
         <p>{ROLE_TEXT[auth.user.role]}</p>
       </div>
 
