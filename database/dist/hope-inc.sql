@@ -2,6 +2,7 @@
 -- Fictitious Company
 -- Conceptualized by JEREMIAS C. ESPERANZA - NEU CCS
 -- Information Management Course
+
 DROP TABLE IF EXISTS employee CASCADE;
 DROP TABLE IF EXISTS department CASCADE;
 DROP TABLE IF EXISTS job CASCADE;
@@ -14,14 +15,16 @@ DROP TABLE IF EXISTS payment CASCADE;
 DROP TABLE IF EXISTS priceHist CASCADE;
 DROP TABLE IF EXISTS audit_log CASCADE;
 
-CREATE TABLE employee (empno VARCHAR(5) NOT NULL PRIMARY KEY,
-												lastname VARCHAR(15),
-												firstname VARCHAR(15),
-												gender CHAR(1) CONSTRAINT gender_ck CHECK (gender in ('M','F')),
-												birthdate DATE,
-												hiredate DATE,
+-- Create customer table 
+CREATE TABLE employee (empno VARCHAR(5) NOT NULL PRIMARY KEY, 
+												lastname VARCHAR(15),  
+												firstname VARCHAR(15), 
+												gender CHAR(1) CONSTRAINT gender_ck CHECK (gender in ('M','F')), 
+												birthdate DATE, 
+												hiredate DATE, 
 												sepDate DATE);
 
+-- Insert employee records
 INSERT INTO employee VALUES('00001','Smith', 'John', 'M','1985-02-20','2010-05-11', NULL);
 INSERT INTO employee VALUES('00003','Smith', 'Jane', 'F','1990-05-16','2010-05-11', NULL);
 INSERT INTO employee VALUES('00005','King', 'Don', 'M','1986-02-14','2010-06-23', NULL);
@@ -55,8 +58,9 @@ INSERT INTO employee VALUES('00059','Sy', 'Alice', 'F','1984-08-13','2011-01-05'
 INSERT INTO employee VALUES('00061','De Leon', 'Girlie', 'F','1983-07-27','2011-01-05', NULL);
 INSERT INTO employee VALUES('00063','Grant', 'Albert', 'M','1979-05-05','2011-01-05', NULL);
 
+-- Create DEPARTMENT
 CREATE TABLE department (deptCode VARCHAR(3) NOT NULL,
-												  deptName VARCHAR (20),
+												  deptName VARCHAR (20), 
 												  PRIMARY KEY (deptCode)) ;
 
 INSERT INTO department  VALUES  ('ACT', 'Accounting'),
@@ -65,12 +69,15 @@ INSERT INTO department  VALUES  ('ACT', 'Accounting'),
 															  ('EXC', 'Executive'),
 															  ('HRD', 'Human Resource'),
 															  ('IT', 'Information Tech'),
-															  ('PAY', 'Payroll'),
+															  ('PAY', 'Payroll'), 
 															  ('WHS', 'Warehouse');
 
-CREATE TABLE job (jobCode VARCHAR(4) NOT NULL PRIMARY KEY,
+
+-- Create JOB 
+CREATE TABLE job (jobCode VARCHAR(4) NOT NULL PRIMARY KEY, 
 									 jobDesc VARCHAR(20)) ;
 
+-- Insert rows JOB 
 INSERT INTO job VALUES('PRES','President');
 INSERT INTO job VALUES('VP','Vice president');
 INSERT INTO job VALUES('MGR','Manager');
@@ -86,14 +93,17 @@ INSERT INTO job VALUES('ACCT','Accountant');
 INSERT INTO job VALUES('WMAN','Warehouse man');
 INSERT INTO job VALUES('HRS','HR Specialist');
 
+
+-- Create jobHistory
 CREATE TABLE jobHistory (empNo VARCHAR(5) NOT NULL REFERENCES employee,
-												  jobCode VARCHAR(4) NOT NULL REFERENCES job,
-												  effDate DATE NOT NULL ,
-												  salary DECIMAL(10,2) CONSTRAINT salary_ck
+												  jobCode VARCHAR(4) NOT NULL REFERENCES job, 
+												  effDate DATE NOT NULL , 
+												  salary DECIMAL(10,2) CONSTRAINT salary_ck 
 												  CHECK (salary >= 0.0), deptCode VARCHAR(4),
-												  PRIMARY KEY (empNo, jobCode,effDate),
+												  PRIMARY KEY (empNo, jobCode,effDate), 
 												  FOREIGN KEY (deptCode) REFERENCES department);
 
+-- Insert rows jobHistory
 INSERT INTO jobHistory VALUES('00001','PR1', '2010-05-11', 48000,'IT');
 INSERT INTO jobHistory VALUES('00001','PR2', '2010-12-01', 50000,'IT');
 INSERT INTO jobHistory VALUES('00003','PR2', '2010-05-11', 50000,'IT');
@@ -149,12 +159,16 @@ INSERT INTO jobHistory VALUES('00061','SA1', '2011-01-05', 36000,'BR2');
 INSERT INTO jobHistory VALUES('00063','SA2', '2011-01-05', 38000,'BR2');
 INSERT INTO jobHistory VALUES('00063','SPVR', '2011-06-01', 40000,'BR2');
 
-CREATE TABLE customer (custno VARCHAR(5) NOT NULL PRIMARY KEY,
-											   custname VARCHAR(20),
-											   address VARCHAR(50),
-											   payterm VARCHAR(3) CONSTRAINT pay_ck
+select * from jobHistory;
+
+-- Create table Customer
+CREATE TABLE customer (custno VARCHAR(5) NOT NULL PRIMARY KEY, 
+											   custname VARCHAR(20), 
+											   address VARCHAR(50), 
+											   payterm VARCHAR(3) CONSTRAINT pay_ck 
 											   CHECK (payterm IN ('COD', '30D', '45D'))) ;
 
+-- Insert customer records
 INSERT INTO customer VALUES('C0001','Globus Medical, Inc', '2560 Gen Armistead Ave Audubon CA 94031', '30D');
 INSERT INTO customer VALUES('C0002','RF Industries, Inc', '7610 Miramar Rd San Diego, CA 92602', '45D');
 INSERT INTO customer VALUES('C0003','Trisha Macdowell', '7642 Clairemont Mesa Blvd San Diego CA 90321', 'COD');
@@ -238,13 +252,16 @@ INSERT INTO customer VALUES('C0080','Social Sec Admn CA', '3836 Wilshire Blvd, L
 INSERT INTO customer VALUES('C0081','Dept Food and Agri', '220 N Street Sacramento, CA 95814', '45D');
 INSERT INTO customer VALUES('C0082','California Dept Tech', '1325 J St Suite 1600 Sacramento CA 95814', '45D');
 
-CREATE TABLE  sales (transNo VARCHAR(8) NOT NULL PRIMARY KEY,
-												salesDate DATE,
-												custNo VARCHAR(5),
-												empNo VARCHAR(5),
-												FOREIGN KEY (custNo) REFERENCES customer,
+
+-- Create sales
+CREATE TABLE  sales (transNo VARCHAR(8) NOT NULL PRIMARY KEY, 
+												salesDate DATE, 
+												custNo VARCHAR(5), 
+												empNo VARCHAR(5), 	
+												FOREIGN KEY (custNo) REFERENCES customer, 
 												FOREIGN KEY (empno) REFERENCES employee);
 
+-- Insert rows sales
 INSERT INTO sales VALUES('TR000001','2010-06-27', 'C0001', '00005');
 INSERT INTO sales VALUES('TR000002','2010-07-05', 'C0003', '00005');
 INSERT INTO sales VALUES('TR000003','2010-07-05', 'C0002', '00015');
@@ -370,10 +387,12 @@ INSERT INTO sales VALUES('TR000122','2011-04-12', 'C0080', '00025');
 INSERT INTO sales VALUES('TR000123','2011-04-12', 'C0081', '00019');
 INSERT INTO sales VALUES('TR000124','2011-04-15', 'C0082', '00017');
 
-CREATE TABLE product (prodCode VARCHAR(6) NOT NULL PRIMARY KEY,
-											description VARCHAR(30),
-											unit VARCHAR(3) CONSTRAINT unit_ck
+-- Create PRODUCT
+CREATE TABLE product (prodCode VARCHAR(6) NOT NULL PRIMARY KEY, 
+											description VARCHAR(30), 
+											unit VARCHAR(3) CONSTRAINT unit_ck 
 											CHECK (unit IN ('pc','ea','mtr','pkg','ltr')));
+-- Insert rows PRODUCT
 INSERT INTO product VALUES('AD0001','Toshiba Canvio 1 TB', 'ea');
 INSERT INTO product VALUES('AD0002','WD Ultra 1TB ', 'ea');
 INSERT INTO product VALUES('AD0003','Seagate Bracuda 1TB ', 'ea');
@@ -431,13 +450,16 @@ INSERT INTO product VALUES('PR0003','HP Envy 4500 Wireles', 'pc');
 INSERT INTO product VALUES('PS0001','VirServ 12Core 128GB', 'pc');
 INSERT INTO product VALUES('PS0002','Ms WinServer 2012', 'pc');
 INSERT INTO product VALUES('PS0003','Cisco Virt Hardware', 'pc');
+											
 
-CREATE TABLE salesDetail (transNo VARCHAR(8) NOT NULL REFERENCES sales,
-													prodCode VARCHAR(6) NOT NULL REFERENCES product,
-													quantity DECIMAL(10,2) CONSTRAINT quantity_ck
-													CHECK (quantity >= 0.0),
+-- Create salesDETAIL
+CREATE TABLE salesDetail (transNo VARCHAR(8) NOT NULL REFERENCES sales, 
+													prodCode VARCHAR(6) NOT NULL REFERENCES product, 
+													quantity DECIMAL(10,2) CONSTRAINT quantity_ck 
+													CHECK (quantity >= 0.0), 
 													PRIMARY KEY (transNo, prodCode));
-
+													
+-- Insert salesDETAIL rows 
 INSERT INTO salesDetail VALUES('TR000001','AK0002', 10);
 INSERT INTO salesDetail VALUES('TR000001','AM0003', 10);
 INSERT INTO salesDetail VALUES('TR000001','MD0001', 10);
@@ -752,11 +774,14 @@ INSERT INTO salesDetail VALUES('TR000124','PF0005', 3);
 INSERT INTO salesDetail VALUES('TR000124','PF0006', 2);
 INSERT INTO salesDetail VALUES('TR000124','PS0001', 3);
 
-CREATE TABLE payment (orNo VARCHAR(8) NOT NULL PRIMARY KEY,
-											  payDate DATE,
-											  amount DECIMAL(10,2),
+
+-- Create table PAYMENT
+CREATE TABLE payment (orNo VARCHAR(8) NOT NULL PRIMARY KEY, 
+											  payDate DATE, 
+											  amount DECIMAL(10,2), 
 											  transno VARCHAR(8) REFERENCES  sales);
 
+-- Insert PAYMENT rows 
 INSERT INTO payment VALUES('OR000001','2010-06-20', '3284.7', 'TR000001');
 INSERT INTO payment VALUES('OR000002','2010-07-05', '1581.72', 'TR000002');
 INSERT INTO payment VALUES('OR000003','2010-07-05', '7.5', 'TR000003');
@@ -923,12 +948,15 @@ INSERT INTO payment VALUES('OR000163','2011-05-30', '43708.17', 'TR000120');
 INSERT INTO payment VALUES('OR000164','2011-05-30', '12804.3', 'TR000121');
 INSERT INTO payment VALUES('OR000165','2011-05-30', '27587.77', 'TR000122');
 
-CREATE TABLE priceHist (effDate DATE NOT NULL,
-											   prodCode VARCHAR(6) NOT NULL REFERENCES product,
-											   unitPrice DECIMAL(10,2) CONSTRAINT unitP_ck
-											   CHECK (unitPrice > 0),
+
+-- Create table PRICEHIST
+CREATE TABLE priceHist (effDate DATE NOT NULL, 
+											   prodCode VARCHAR(6) NOT NULL REFERENCES product, 
+											   unitPrice DECIMAL(10,2) CONSTRAINT unitP_ck 
+											   CHECK (unitPrice > 0),  
 											   PRIMARY KEY (effDate, prodCode));
 
+--  Insert PRICEHIST rows 
 INSERT INTO priceHist VALUES('2010-05-15','AK0001', 12);
 INSERT INTO priceHist VALUES('2010-05-15','AK0002', 8.37);
 INSERT INTO priceHist VALUES('2010-05-15','AK0003', 99.99);
@@ -1009,36 +1037,58 @@ INSERT INTO priceHist VALUES('2010-12-01','MP0003', 425);
 INSERT INTO priceHist VALUES('2010-12-01','MP0004', 302);
 INSERT INTO priceHist VALUES('2011-02-01','NB0005', 1184.72);
 
+
+-- =====================================================================
+-- AUDIT TRAIL + SOFT DELETE  (standard PostgreSQL)
+-- Everything below runs AFTER all the data above has been loaded.
+--   * every table gets:  is_deleted (soft delete flag)  and  stamp
+--   * stamp looks like:  EDIT user1 2026-10-12 11:18 AM
+--       (ADD / EDIT / DELETE / RESTORE  +  user  +  date  +  time)
+--   * audit_log keeps the full history (old and new values)
+--   * hard DELETE and TRUNCATE are blocked on every table
+--   * <table>_active views show only rows where is_deleted = false
+-- =====================================================================
+
+-- 1. Central audit table ------------------------------------------------
 CREATE TABLE audit_log (
     audit_id    BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     table_name  VARCHAR(30) NOT NULL,
     action      VARCHAR(7)  NOT NULL CHECK (action IN ('ADD','EDIT','DELETE','RESTORE')),
-    record_key  VARCHAR(60),
-    old_values  JSONB,
+    record_key  VARCHAR(60),             -- primary key value(s), joined with '|'
+    old_values  JSONB,                   -- NULL for ADD
     new_values  JSONB,
     action_by   VARCHAR(50) NOT NULL,
     action_at   TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
+-- 2. Helper functions ---------------------------------------------------
+-- Who is acting? If the application sets  SET app.username = 'user1'
+-- (e.g. because everyone shares one DB login) that name is used; otherwise
+-- the database login name is used.
 CREATE OR REPLACE FUNCTION audit_user() RETURNS TEXT
 LANGUAGE sql STABLE AS $$
     SELECT COALESCE(NULLIF(current_setting('app.username', true), ''),
                     session_user::text);
 $$;
 
+-- Builds the stamp text, e.g.  EDIT user1 2026-10-12 11:18 AM
+-- (time shown in Asia/Manila; change the zone here if needed)
 CREATE OR REPLACE FUNCTION audit_stamp(p_action TEXT) RETURNS TEXT
 LANGUAGE sql STABLE AS $$
     SELECT p_action || ' ' || audit_user() || ' ' ||
            to_char(now() AT TIME ZONE 'Asia/Manila', 'YYYY-MM-DD HH12:MI AM');
 $$;
 
+-- 3. Trigger functions --------------------------------------------------
+
+-- 3a. Sets the stamp column on every INSERT / UPDATE
 CREATE OR REPLACE FUNCTION trg_set_stamp() RETURNS TRIGGER
 LANGUAGE plpgsql AS $$
 BEGIN
     IF TG_OP = 'INSERT' THEN
         NEW.stamp := audit_stamp('ADD');
     ELSIF (to_jsonb(OLD) - 'stamp') = (to_jsonb(NEW) - 'stamp') THEN
-        NEW.stamp := OLD.stamp;
+        NEW.stamp := OLD.stamp;                      -- nothing changed
     ELSIF NOT OLD.is_deleted AND NEW.is_deleted THEN
         NEW.stamp := audit_stamp('DELETE');
     ELSIF OLD.is_deleted AND NOT NEW.is_deleted THEN
@@ -1050,6 +1100,7 @@ BEGIN
 END;
 $$;
 
+-- 3b. Writes the history row to audit_log (key columns passed as arguments)
 CREATE OR REPLACE FUNCTION trg_audit_log() RETURNS TRIGGER
 LANGUAGE plpgsql AS $$
 DECLARE
@@ -1065,7 +1116,7 @@ BEGIN
         VALUES (TG_TABLE_NAME, 'ADD', v_key, NULL, to_jsonb(NEW), audit_user());
     ELSE
         IF (to_jsonb(OLD) - 'stamp') = (to_jsonb(NEW) - 'stamp') THEN
-            RETURN NULL;
+            RETURN NULL;                             -- nothing changed, no log
         END IF;
         v_action := CASE
                       WHEN NOT OLD.is_deleted AND NEW.is_deleted THEN 'DELETE'
@@ -1079,6 +1130,7 @@ BEGIN
 END;
 $$;
 
+-- 3c. Blocks hard DELETE / TRUNCATE (soft delete only)
 CREATE OR REPLACE FUNCTION trg_block_hard_delete() RETURNS TRIGGER
 LANGUAGE plpgsql AS $$
 BEGIN
@@ -1086,6 +1138,7 @@ BEGIN
 END;
 $$;
 
+-- 3d. Blocks any change to audit_log itself (history is append-only)
 CREATE OR REPLACE FUNCTION trg_protect_audit_log() RETURNS TRIGGER
 LANGUAGE plpgsql AS $$
 BEGIN
@@ -1093,13 +1146,14 @@ BEGIN
 END;
 $$;
 
+-- 3e. A parent row cannot be soft-deleted while it still has active children
 CREATE OR REPLACE FUNCTION trg_check_children() RETURNS TRIGGER
 LANGUAGE plpgsql AS $$
 DECLARE
     v_n INT := 0;
 BEGIN
     IF NOT (NEW.is_deleted AND NOT OLD.is_deleted) THEN
-        RETURN NEW;
+        RETURN NEW;                                  -- not a soft delete
     END IF;
 
     CASE TG_TABLE_NAME
@@ -1128,7 +1182,7 @@ BEGIN
                 UNION ALL
                 SELECT 1 FROM pricehist   WHERE prodcode = OLD.prodcode AND NOT is_deleted) c;
         ELSE
-            NULL;
+            NULL;                                    -- child tables: nothing to check
     END CASE;
 
     IF v_n > 0 THEN
@@ -1138,6 +1192,7 @@ BEGIN
 END;
 $$;
 
+-- 4. Attach everything to the 10 tables ---------------------------------
 DO $$
 DECLARE
     r      RECORD;
@@ -1157,12 +1212,15 @@ BEGIN
             ('pricehist',   'effdate,prodcode')
         ) AS t(tbl, keycols)
     LOOP
+        -- new columns
         EXECUTE format('ALTER TABLE %I ADD COLUMN is_deleted BOOLEAN NOT NULL DEFAULT FALSE,
                                       ADD COLUMN stamp VARCHAR(60)', r.tbl);
 
+        -- label the rows loaded by this script
         EXECUTE format('UPDATE %I SET stamp = %L', r.tbl,
                        'ADD system ' || to_char(now() AT TIME ZONE 'Asia/Manila', 'YYYY-MM-DD HH12:MI AM'));
 
+        -- trigger arguments = quoted key column names
         SELECT string_agg(quote_literal(k), ',') INTO v_args
           FROM unnest(string_to_array(r.keycols, ',')) AS k;
 
@@ -1182,12 +1240,14 @@ BEGIN
                         FOR EACH ROW EXECUTE FUNCTION trg_audit_log(%s)',
                        r.tbl || '_aiu_audit', r.tbl, v_args);
 
+        -- view of active (not deleted) rows
         EXECUTE format('CREATE VIEW %I AS SELECT * FROM %I WHERE NOT is_deleted',
                        r.tbl || '_active', r.tbl);
     END LOOP;
 END;
 $$;
 
+-- audit_log is append-only
 CREATE TRIGGER audit_log_protect_row
     BEFORE UPDATE OR DELETE ON audit_log
     FOR EACH ROW EXECUTE FUNCTION trg_protect_audit_log();
@@ -1195,9 +1255,14 @@ CREATE TRIGGER audit_log_protect_truncate
     BEFORE TRUNCATE ON audit_log
     FOR EACH STATEMENT EXECUTE FUNCTION trg_protect_audit_log();
 
--- ====================================================================
--- FILE: migrations/02_users_and_rights.sql
--- ====================================================================
+-- =====================================================================
+-- Usage examples
+--   Soft delete : UPDATE employee SET is_deleted = true  WHERE empno = '00015';
+--   Restore     : UPDATE employee SET is_deleted = false WHERE empno = '00015';
+--   History     : SELECT * FROM audit_log WHERE table_name = 'employee' ORDER BY audit_id;
+--   Active rows : SELECT * FROM employee_active;
+-- =====================================================================
+
 CREATE TABLE IF NOT EXISTS role (
     role_code  VARCHAR(12) PRIMARY KEY,
     role_name  VARCHAR(30) NOT NULL
@@ -1413,9 +1478,6 @@ CREATE POLICY lookup_read ON module FOR SELECT TO authenticated USING (true);
 CREATE POLICY lookup_read ON rights FOR SELECT TO authenticated USING (true);
 CREATE POLICY audit_read ON audit_log FOR SELECT TO authenticated USING (my_role() = 'superadmin');
 
--- ====================================================================
--- FILE: migrations/03_password_reset.sql
--- ====================================================================
 CREATE TABLE IF NOT EXISTS password_reset_token (
     token_id    BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     user_id     UUID        NOT NULL REFERENCES app_user (id),
@@ -1484,9 +1546,6 @@ $$;
 REVOKE ALL ON FUNCTION issue_password_reset_token(TEXT, INT) FROM PUBLIC, anon, authenticated;
 REVOKE ALL ON FUNCTION consume_password_reset_token(TEXT)    FROM PUBLIC, anon, authenticated;
 
--- ====================================================================
--- FILE: migrations/04_audit_user.sql
--- ====================================================================
 CREATE OR REPLACE FUNCTION audit_user() RETURNS TEXT
 LANGUAGE plpgsql STABLE SECURITY DEFINER SET search_path = public AS $$
 DECLARE
@@ -1503,9 +1562,6 @@ BEGIN
 END;
 $$;
 
--- ====================================================================
--- FILE: migrations/05_security.sql
--- ====================================================================
 CREATE OR REPLACE FUNCTION trg_check_rights() RETURNS TRIGGER
 LANGUAGE plpgsql AS $$
 DECLARE
@@ -1635,9 +1691,6 @@ ALTER VIEW sales_active SET (security_invoker = true);
 ALTER VIEW salesdetail_active SET (security_invoker = true);
 ALTER VIEW payment_active SET (security_invoker = true);
 
--- ====================================================================
--- FILE: migrations/06_hr.sql
--- ====================================================================
 CREATE OR REPLACE VIEW employee_current_job WITH (security_invoker = true) AS
 SELECT DISTINCT ON (e.empno)
        e.empno,
@@ -1798,9 +1851,6 @@ CREATE INDEX IF NOT EXISTS user_permission_user_idx ON user_permission (user_id)
 
 ANALYZE employee; ANALYZE jobhistory; ANALYZE sales; ANALYZE salesdetail; ANALYZE payment; ANALYZE pricehist;
 
--- ====================================================================
--- FILE: migrations/07_sales_and_reports.sql
--- ====================================================================
 CREATE OR REPLACE FUNCTION price_on(p_prodcode TEXT, p_date DATE) RETURNS NUMERIC
 LANGUAGE sql STABLE SECURITY INVOKER AS $$
     SELECT unitprice FROM pricehist
@@ -1985,9 +2035,42 @@ BEGIN
 END;
 $$;
 
--- ====================================================================
--- FILE: seeds/01_roles_and_rights.sql
--- ====================================================================
+CREATE EXTENSION IF NOT EXISTS pg_trgm WITH SCHEMA extensions;
+
+CREATE INDEX IF NOT EXISTS customer_name_idx ON customer (lower(custname))   WHERE is_deleted = FALSE;
+CREATE INDEX IF NOT EXISTS product_desc_idx  ON product (lower(description)) WHERE is_deleted = FALSE;
+
+CREATE INDEX IF NOT EXISTS customer_name_search_idx    ON customer USING gin (custname extensions.gin_trgm_ops);
+CREATE INDEX IF NOT EXISTS customer_address_search_idx ON customer USING gin (address extensions.gin_trgm_ops);
+CREATE INDEX IF NOT EXISTS product_desc_search_idx     ON product  USING gin (description extensions.gin_trgm_ops);
+
+CREATE OR REPLACE FUNCTION search_customers(p_text TEXT)
+RETURNS SETOF customer
+LANGUAGE sql STABLE SECURITY INVOKER AS $$
+    SELECT * FROM customer
+     WHERE is_deleted = FALSE
+       AND (custno ILIKE '%' || p_text || '%'
+            OR custname ILIKE '%' || p_text || '%'
+            OR address ILIKE '%' || p_text || '%')
+     ORDER BY custname;
+$$;
+
+CREATE OR REPLACE FUNCTION search_products(p_text TEXT)
+RETURNS SETOF product
+LANGUAGE sql STABLE SECURITY INVOKER AS $$
+    SELECT * FROM product
+     WHERE is_deleted = FALSE
+       AND (prodcode ILIKE '%' || p_text || '%'
+            OR description ILIKE '%' || p_text || '%')
+     ORDER BY description;
+$$;
+
+REVOKE ALL ON FUNCTION search_customers(TEXT), search_products(TEXT) FROM PUBLIC, anon;
+GRANT EXECUTE ON FUNCTION search_customers(TEXT), search_products(TEXT) TO authenticated;
+
+ANALYZE customer;
+ANALYZE product;
+
 INSERT INTO role VALUES
     ('superadmin', 'Superadmin'),
     ('admin', 'Admin'),
@@ -2050,9 +2133,6 @@ SELECT 'roles' AS seeded, count(*) FROM role
 UNION ALL SELECT 'modules', count(*) FROM module
 UNION ALL SELECT 'rights', count(*) FROM rights;
 
--- ====================================================================
--- FILE: seeds/02_admins.sql
--- ====================================================================
 INSERT INTO app_user (id, email)
 SELECT id, lower(email) FROM auth.users
 ON CONFLICT (id) DO NOTHING;
@@ -2078,3 +2158,13 @@ SELECT t.email,
   LEFT JOIN app_user u ON u.email = lower(t.email)
   LEFT JOIN promoted p ON p.email = lower(t.email)
  ORDER BY t.email;
+
+
+SELECT (SELECT COUNT(*) FROM customer) AS customers,
+       (SELECT COUNT(*) FROM product) AS products,
+       (SELECT COUNT(*) FROM employee) AS employees,
+       (SELECT COUNT(*) FROM sales) AS sales,
+       (SELECT COUNT(*) FROM payment) AS payments,
+       (SELECT COUNT(*) FROM rights) AS rights,
+       (SELECT COUNT(*) FROM app_user) AS accounts,
+       (SELECT COUNT(*) FROM app_user WHERE role = 'superadmin' AND status = 'active') AS superadmins;
