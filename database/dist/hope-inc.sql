@@ -2137,28 +2137,99 @@ INSERT INTO app_user (id, email)
 SELECT id, lower(email) FROM auth.users
 ON CONFLICT (id) DO NOTHING;
 
-WITH team(email) AS (VALUES
-    ('member1@example.com'),
-    ('member2@example.com'),
-    ('member3@example.com'),
-    ('member4@example.com'),
-    ('member5@example.com')
-), promoted AS (
-    UPDATE app_user u SET role = 'superadmin', status = 'active'
-      FROM team t
-     WHERE u.email = lower(t.email) AND NOT u.is_deleted
-       AND (u.role <> 'superadmin' OR u.status <> 'active')
-    RETURNING u.email
-)
-SELECT t.email,
-       CASE WHEN u.id IS NULL THEN 'not invited yet'
-            WHEN u.role = 'superadmin' OR p.email IS NOT NULL THEN 'superadmin'
-            ELSE u.role END AS result
-  FROM team t
-  LEFT JOIN app_user u ON u.email = lower(t.email)
-  LEFT JOIN promoted p ON p.email = lower(t.email)
- ORDER BY t.email;
+UPDATE app_user SET role = 'superadmin', status = 'active'
+WHERE email = 'alessandrasandycortez@gmail.com';
 
+UPDATE app_user SET role = 'admin', status = 'active'
+WHERE email IN ('dawnvillanueva01@gmail.com',
+                'doblesashley05@gmail.com',
+                'NORMINAH_EMAIL_HERE',
+                'ZYRIAN_EMAIL_HERE');
+
+SELECT t.email, COALESCE(u.role, 'not invited yet') AS role, u.status
+  FROM (VALUES ('alessandrasandycortez@gmail.com'),
+               ('dawnvillanueva01@gmail.com'),
+               ('doblesashley05@gmail.com'),
+               ('NORMINAH_EMAIL_HERE'),
+               ('ZYRIAN_EMAIL_HERE')) AS t(email)
+  LEFT JOIN app_user u ON u.email = t.email
+ ORDER BY u.role DESC NULLS LAST, t.email;
+
+SET app.username = 'demo-data';
+
+INSERT INTO customer (custno, custname, address, payterm) VALUES
+    ('C9001', 'Laguna Tech Supply', '12 Rizal St, Sta. Cruz, Laguna', 'COD'),
+    ('C9002', 'Manila Office Hub', '88 Taft Ave, Manila', '30D'),
+    ('C9003', 'QC Computer Center', '45 Katipunan Ave, Quezon City', '45D'),
+    ('C9004', 'Bay Area Printing', '310 Roxas Blvd, Pasay City', '30D'),
+    ('C9005', 'Juan dela Cruz', '7 Mabini St, Calamba, Laguna', 'COD')
+ON CONFLICT (custno) DO NOTHING;
+
+INSERT INTO product (prodcode, description, unit) VALUES
+    ('DM0001', 'Logitech Wireless Mouse', 'ea'),
+    ('DM0002', 'A4 Bond Paper 500 sheets', 'pkg'),
+    ('DM0003', 'Cat6 LAN Cable', 'mtr'),
+    ('DM0004', 'HDMI Cable 2m', 'pc'),
+    ('DM0005', 'Printer Ink Black', 'ltr')
+ON CONFLICT (prodcode) DO NOTHING;
+
+INSERT INTO pricehist (effdate, prodcode, unitprice) VALUES
+    ('2024-01-01', 'DM0001', 15.00),
+    ('2025-06-01', 'DM0001', 17.50),
+    ('2024-01-01', 'DM0002', 4.25),
+    ('2025-06-01', 'DM0002', 4.75),
+    ('2024-01-01', 'DM0003', 1.20),
+    ('2025-06-01', 'DM0003', 1.35),
+    ('2024-01-01', 'DM0004', 6.00),
+    ('2025-06-01', 'DM0004', 5.50),
+    ('2024-01-01', 'DM0005', 22.00),
+    ('2025-06-01', 'DM0005', 24.00)
+ON CONFLICT (effdate, prodcode) DO NOTHING;
+
+SELECT p.prodcode, p.description,
+       price_on(p.prodcode, '2024-12-31') AS price_2024,
+       price_on(p.prodcode, CURRENT_DATE) AS price_today
+  FROM product p
+ WHERE p.prodcode LIKE 'DM%'
+ ORDER BY p.prodcode;
+
+SET app.username = 'demo-data';
+
+INSERT INTO department (deptcode, deptname) VALUES
+    ('MKT', 'Marketing')
+ON CONFLICT (deptcode) DO NOTHING;
+
+INSERT INTO job (jobcode, jobdesc) VALUES
+    ('MKTS', 'Marketing Specialist'),
+    ('MKTL', 'Marketing Lead')
+ON CONFLICT (jobcode) DO NOTHING;
+
+INSERT INTO employee (empno, lastname, firstname, gender, birthdate, hiredate, sepdate) VALUES
+    ('00065', 'Dela Cruz', 'Andrea',  'F', '1994-03-14', '2012-02-01', NULL),
+    ('00067', 'Santos',    'Miguel',  'M', '1991-11-02', '2012-02-01', NULL),
+    ('00069', 'Reyes',     'Bea',     'F', '1996-07-25', '2013-06-17', NULL),
+    ('00071', 'Garcia',    'Paolo',   'M', '1989-01-30', '2012-05-02', '2014-08-29'),
+    ('00073', 'Villanueva','Carmela', 'F', '1993-09-09', '2014-01-06', NULL)
+ON CONFLICT (empno) DO NOTHING;
+
+INSERT INTO jobhistory (empno, jobcode, effdate, salary, deptcode) VALUES
+    ('00065', 'MKTS', '2012-02-01', 42000, 'MKT'),
+    ('00065', 'MKTL', '2013-07-01', 58000, 'MKT'),
+    ('00067', 'PR1',  '2012-02-01', 48000, 'IT'),
+    ('00067', 'ANYS', '2013-03-01', 55000, 'MKT'),
+    ('00069', 'CLK1', '2013-06-17', 34000, 'HRD'),
+    ('00069', 'CLK1', '2014-06-17', 36000, 'HRD'),
+    ('00071', 'SA1',  '2012-05-02', 36000, 'BR1'),
+    ('00071', 'SA2',  '2013-05-02', 38000, 'BR1'),
+    ('00073', 'HRS',  '2014-01-06', 45000, 'HRD')
+ON CONFLICT (empno, jobcode, effdate) DO NOTHING;
+
+RESET app.username;
+
+SELECT empno, firstname, lastname, jobdesc, deptname, salary, job_since, is_employed
+  FROM employee_current_job
+ WHERE empno IN ('00065', '00067', '00069', '00071', '00073')
+ ORDER BY empno;
 
 SELECT (SELECT COUNT(*) FROM customer) AS customers,
        (SELECT COUNT(*) FROM product) AS products,
@@ -2167,4 +2238,5 @@ SELECT (SELECT COUNT(*) FROM customer) AS customers,
        (SELECT COUNT(*) FROM payment) AS payments,
        (SELECT COUNT(*) FROM rights) AS rights,
        (SELECT COUNT(*) FROM app_user) AS accounts,
-       (SELECT COUNT(*) FROM app_user WHERE role = 'superadmin' AND status = 'active') AS superadmins;
+       (SELECT COUNT(*) FROM app_user WHERE role = 'superadmin' AND status = 'active') AS superadmins,
+       (SELECT COUNT(*) FROM app_user WHERE role = 'admin' AND status = 'active') AS admins;
