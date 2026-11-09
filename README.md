@@ -10,15 +10,15 @@ Languages (frontend) used: HTML, CSS, Javascript
 
 
 P R O J E C T    R O L E S
-Scrum Master: Zyrian Ian Acorda
+- Scrum Master: Zyrian Ian Acorda
 
-DB Admin: Khrisz Alessandra Cortez
+- DB Admin: Khrisz Alessandra Cortez
 
-UI/UX Designer: Ashley Nicole Dobles
+- UI/UX Designer: Ashley Nicole Dobles
 
-Developer: Norminah Pampa
+- Developer: Norminah Pampa
 
-Tester: Ylthea Dawn Villanueva
+- Tester: Ylthea Dawn Villanueva
 
 project board sample:
 https://canva.link/6dewjzx0oaw1bl6
