@@ -1,0 +1,18 @@
+[
+  {
+    "id": "S2-TST-01-01",
+    "sprint": 2,
+    "module": "Customer Management",
+    "title": "Add New Customer and Verify Active Customer Count",
+    "type": "Functional",
+    "priority": "High",
+    "assignee": "Villanueva",
+    "role": "Tester",
+    "preconditions": [
+      "User is logged into HOPE, Inc. ERP as ADMIN",
+      "Customer Management module is open"
+    ],
+    "expected_result": "Customer record 'C9006' is created with status 'Active', listed in the table, and total Active customer count increases to 88.",
+    "status": "PASSED"
+  }
+]
