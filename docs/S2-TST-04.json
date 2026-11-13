@@ -1,0 +1,11 @@
+{
+  "row": 52,
+  "taskId": "S2-TST-04",
+  "sprint": 2,
+  "week": 4,
+  "role": "Tester",
+  "assignedTo": "Villanueva",
+  "task": "Per-right permission tests for customer and product",
+  "dueSprintDay": 8,
+  "status": "Passed"
+}
