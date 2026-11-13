@@ -1,0 +1,13 @@
+{
+  "row": 50,
+  "taskId": "S2-TST-02",
+  "sprint": 2,
+  "week": 3,
+  "role": "Tester",
+  "assignedTo": "Villanueva",
+  "task": "Test cases: product and price history",
+  "dueSprintDay": 5,
+  "status": "",
+  "prLink": "",
+  "notes": ""
+}
