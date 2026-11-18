@@ -63,7 +63,7 @@ export default function Products() {
       {historyFor && <PriceHistory product={historyFor} onClose={() => setHistoryFor(null)} />}
       {confirm && (
         <ConfirmModal title="Delete product?" onClose={() => setConfirm(null)}
-          message={`${confirm.prodCode} · ${confirm.description} will move to the Deleted tab. A product with active sales lines or prices cannot be deleted.`}
+          message={`${confirm.prodCode} · ${confirm.description} will be moved to the Deleted tab. A product that has active sales lines or prices cannot be deleted.`}
           onConfirm={() => setDeleted('products', confirm, true)} />
       )}
     </>
