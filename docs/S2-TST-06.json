@@ -1,0 +1,11 @@
+{
+  "row": 54,
+  "taskId": "S2-TST-06",
+  "sprint": 2,
+  "week": 4,
+  "role": "Tester",
+  "assignedTo": "Villanueva",
+  "task": "Bug reports and fix verification",
+  "dueSprintDay": 9,
+  "status": "Passed"
+}
