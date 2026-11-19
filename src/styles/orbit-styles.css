@@ -1,4 +1,4 @@
-/* ---------- Landing hero: orbiting module icons ---------- */
+
 .orbit-frame {
   --o-bg: #ffffff; --o-surface: #f6f4f7; --o-line: #e4dfe8; --o-bar: #e4dfe8; --o-bar-2: #f1edf3;
   --o-accent: #c94f86; --o-accent-line: #e9b7cf;
@@ -38,7 +38,7 @@
 @media (prefers-reduced-motion: reduce) {
   .orbit-ring, .orbit-item i, .orbit-center::after { animation: none; }
 }
-/* Chips float over the light orbit frame, so give them a dark backing */
+
 .hero-visual .hero-chip { background: rgba(13, 11, 16, .92); border-color: rgba(255,255,255,.14); z-index: 2; }
 .hero-visual .hero-chip.c1 { left: -12px; top: 6%; }
 .hero-visual .hero-chip.c2 { right: -12px; bottom: 6%; }

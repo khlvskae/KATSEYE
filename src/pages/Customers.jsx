@@ -36,7 +36,7 @@ export default function Customers() {
         <table className="data-table">
           <thead><tr><th>Cust No</th><th>Customer Name</th><th>Address</th><th>Pay Terms</th><th>Status</th><th>Stamp</th><th>Actions</th></tr></thead>
           <tbody>
-            {sorted.length === 0 && <EmptyRow cols={7}>{search ? 'No customers match your search.' : 'No customers here.'}</EmptyRow>}
+            {sorted.length === 0 && <EmptyRow cols={7}>{search ? 'No customers match your search. Try a different query' : 'No customers here.'}</EmptyRow>}
             {sorted.map(c => (
               <tr key={c.custNo} className={c.isDeleted ? 'deleted-row' : ''}>
                 <td><strong>{c.custNo}</strong></td>
