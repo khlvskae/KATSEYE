@@ -1,0 +1,32 @@
+{
+  "taskId": "S2-TST-03",
+  "sprint": 2,
+  "role": "Tester",
+  "executedBy": "Ylthea Dawn P. Villanueva",
+  "executionDate": "2026-11-20",
+  "overallStatus": "Passed",
+  "testCases": [
+    {
+      "id": "TC-S2-03-01",
+      "scenario": "Soft-delete customer without child orders and verify Deleted tab + audit stamp",
+      "expectedResult": "Customer moves to Deleted tab with DELETE user and timestamp logged",
+      "actualResult": "Customer moved to Deleted tab with audit stamp recorded",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-S2-03-02",
+      "scenario": "Restore soft-deleted product (AD0005) and verify audit trail",
+      "input": { "code": "AD0005", "name": "fluffy pillow" },
+      "expectedResult": "Product returns to Active list with RESTORE audit stamp",
+      "actualResult": "AD0005 restored to Active list with 'RESTORE dawnvillanueva01 2026-11-20 10:36 PM'",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-S2-03-03",
+      "scenario": "Block deletion of record with active child dependencies",
+      "expectedResult": "System prevents deletion and displays active related records warning",
+      "actualResult": "Blocked with 'Cannot delete row: active related record(s) still exist'",
+      "status": "Pass"
+    }
+  ]
+}
