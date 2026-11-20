@@ -1,0 +1,36 @@
+{
+  "taskId": "S2-TST-04",
+  "sprint": 2,
+  "role": "Tester",
+  "executedBy": "Ylthea Dawn P. Villanueva",
+  "executionDate": "2026-11-20",
+  "overallStatus": "Passed",
+  "testAccount": {
+    "email": "dawnvillanueva043@gmail.com",
+    "role": "USER",
+    "assignedRights": ["Customer View", "Customer Add", "Product View", "Product Add"]
+  },
+  "testCases": [
+    {
+      "id": "TC-S2-04-01",
+      "scenario": "Verify sidebar hides ungranted modules (HR, Sales, Payments, Reports, User Management)",
+      "expectedResult": "Only Dashboard, Customer, and Products are visible in navigation",
+      "actualResult": "Ungranted modules hidden from sidebar",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-S2-04-02",
+      "scenario": "Verify Customer per-right enforcement (Add enabled; Edit/Delete disabled)",
+      "expectedResult": "+ Add Customer visible; Edit and Delete actions hidden on all rows",
+      "actualResult": "+ Add Customer shown; row ACTIONS column displays '—'",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-S2-04-03",
+      "scenario": "Verify Product & Price per-right enforcement (Add Product enabled; Edit/Delete/Prices disabled)",
+      "expectedResult": "+ Add Product visible; Edit, Delete, and + Add Price hidden",
+      "actualResult": "+ Add Product shown; row Edit/Delete hidden; Price History modal hides + Add Price and price Edit/Delete",
+      "status": "Pass"
+    }
+  ]
+}
