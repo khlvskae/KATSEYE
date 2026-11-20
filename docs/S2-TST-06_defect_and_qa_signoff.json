@@ -1,0 +1,23 @@
+{
+  "taskId": "S2-TST-06",
+  "sprint": 2,
+  "role": "Tester",
+  "executedBy": "Ylthea Dawn P. Villanueva",
+  "signOffDate": "2026-11-20",
+  "qaStatus": "Approved for Sprint 2 Release",
+  "defectsLogged": [
+    {
+      "defectId": "DEF-S2-01",
+      "severity": "Minor",
+      "module": "Product Price History",
+      "summary": "Effective dates prior to 2026-01-01 accepted on historical price seed entries; verified current product pricing displays latest effective date accurately",
+      "status": "Verified / Closed"
+    }
+  ],
+  "sprint2SignOffSummary": {
+    "totalTestSuites": 6,
+    "passed": 6,
+    "failed": 0,
+    "notes": "All Sprint 2 core CRUD, customer/product price history, soft-delete/restore audit trails, and granular per-right RBAC controls verified on Hope, Inc. ERP."
+  }
+}
