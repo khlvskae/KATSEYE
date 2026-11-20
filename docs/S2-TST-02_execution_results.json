@@ -1,0 +1,34 @@
+{
+  "taskId": "S2-TST-02",
+  "sprint": 2,
+  "role": "Tester",
+  "executedBy": "Ylthea Dawn P. Villanueva",
+  "executionDate": "2026-11-20",
+  "overallStatus": "Passed",
+  "testCases": [
+    {
+      "id": "TC-S2-02-01",
+      "scenario": "Create new product with initial effective price",
+      "input": { "code": "AD0005", "name": "fluffy pillow", "unit": "pcs", "price": 120.00 },
+      "expectedResult": "Product saved in Active list and initial price recorded",
+      "actualResult": "Product AD0005 created and displayed with $120.00 active price",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-S2-02-02",
+      "scenario": "Add newer effective price and verify historical price retention",
+      "input": { "code": "AD0065", "previousPrice": 120.00, "newPrice": 150.00, "effectiveDate": "2026-11-20" },
+      "expectedResult": "Latest effective date resolves as active price while older entry remains in history",
+      "actualResult": "Active price updated to $150.00; 2026-11-19 ($120.00) preserved in Price History",
+      "status": "Pass"
+    },
+    {
+      "id": "TC-S2-02-03",
+      "scenario": "Reject duplicate effective date on the same product",
+      "input": { "code": "AD0065", "effectiveDate": "2026-11-20" },
+      "expectedResult": "System blocks duplicate effective date entry with validation error",
+      "actualResult": "Duplicate date rejected with validation message",
+      "status": "Pass"
+    }
+  ]
+}
