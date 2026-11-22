@@ -26,7 +26,7 @@ export default function Landing() {
           <div className="hero-content">
             <span className="eyebrow">Enterprise Resource Planning · 2026</span>
             <h1>Eyes on every <span>Sale</span></h1>
-            <p>Customers, products, people and sales, choreographed in one platform. Hope, Inc. ERP keeps every team in step.</p>
+            <p>Customers, Products, People and Sales, choreographed in one platform. Hope, Inc. ERP keeps every team in step.</p>
             <div className="hero-cta">
               <Link className="btn btn-primary" to="/login">Sign In to Dashboard</Link>
               <Link className="btn btn-outline" to="/register">Create Account</Link>
