@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { useData } from '../context/DataContext';
 import { visibleNav } from '../components/Layout';
 import { ICONS } from '../components/icons';
-import { CustomersIcon, ProductsIcon, SalesIcon, RevenueIcon } from '../components/statIcons';
+import { CustomersIcon, ProductsIcon, SalesIcon, RevenueIcon } from '../components/statIcon';
 import { saleTotal, salePaid } from '../lib/format';
 
 const compact = n =>
