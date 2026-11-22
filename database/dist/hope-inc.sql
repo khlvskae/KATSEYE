@@ -2071,6 +2071,39 @@ GRANT EXECUTE ON FUNCTION search_customers(TEXT), search_products(TEXT) TO authe
 ANALYZE customer;
 ANALYZE product;
 
+CREATE OR REPLACE VIEW product_active_price WITH (security_invoker = true) AS
+SELECT p.prodcode,
+       p.description,
+       p.unit,
+       price_on(p.prodcode, CURRENT_DATE) AS current_price
+  FROM product p
+ WHERE p.is_deleted = FALSE
+ ORDER BY p.prodcode;
+
+REVOKE ALL ON product_active_price FROM anon;
+GRANT SELECT ON product_active_price TO authenticated;
+
+CREATE OR REPLACE FUNCTION price_history_of(p_prodcode TEXT)
+RETURNS TABLE (effdate DATE, unitprice NUMERIC, valid_until DATE)
+LANGUAGE sql STABLE SECURITY INVOKER AS $$
+    SELECT h.effdate,
+           h.unitprice,
+           LEAD(h.effdate) OVER (ORDER BY h.effdate) - 1 AS valid_until
+      FROM pricehist h
+     WHERE h.prodcode = p_prodcode
+       AND h.is_deleted = FALSE
+     ORDER BY h.effdate;
+$$;
+
+REVOKE ALL ON FUNCTION price_history_of(TEXT) FROM PUBLIC, anon;
+GRANT EXECUTE ON FUNCTION price_history_of(TEXT) TO authenticated;
+
+ALTER TABLE customer DROP CONSTRAINT IF EXISTS custname_ck;
+ALTER TABLE customer ADD CONSTRAINT custname_ck CHECK (trim(custname) <> '');
+
+ALTER TABLE product DROP CONSTRAINT IF EXISTS description_ck;
+ALTER TABLE product ADD CONSTRAINT description_ck CHECK (trim(description) <> '');
+
 INSERT INTO role VALUES
     ('superadmin', 'Superadmin'),
     ('admin', 'Admin'),
