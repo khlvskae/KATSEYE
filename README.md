@@ -20,6 +20,7 @@ PROJECT ROLES
   //Designs how the system looks and feels through the design system, wireframes, and mockups, then hands them to the developer and checks the built screens for usability.
 
 - Developer: Norminah Pampa
+  //Builds the application itself, including login, user management, the Customer, Product, HR, and Sales modules, the reports, and the permission checks.
 
 - Tester: Ylthea Dawn Villanueva
 
