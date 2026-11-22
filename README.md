@@ -12,7 +12,7 @@ SECTION: 2BSCS-!
 
 
 PROJECT ROLES
-- Scrum Master: Zyrian Ian Acorda
+- Scrum Master: Zyrian Ian ACORDA
   //Manages the whole flow of the project with the help of the members by setting up the repo and sprint boards, running the reviews and retrospectives, and tracking progress and impediments.
 
 - DB Admin: Khrisz Alessandra Cortez
