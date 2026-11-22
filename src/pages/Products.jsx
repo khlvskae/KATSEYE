@@ -141,7 +141,7 @@ function PriceHistory({ product, onClose }) {
         <table className="data-table">
           <thead><tr><th>Effective Date</th><th className="money">Unit Price</th><th>Status</th><th>Stamp</th><th>Actions</th></tr></thead>
           <tbody>
-            {rows.length === 0 && <EmptyRow cols={5}>No prices here yet.</EmptyRow>}
+            {rows.length === 0 && <EmptyRow cols={5}>No prices here.</EmptyRow>}
             {rows.map(p => (
               <tr key={p.effDate} className={p.isDeleted ? 'deleted-row' : ''}>
                 <td><strong>{p.effDate}</strong></td>
