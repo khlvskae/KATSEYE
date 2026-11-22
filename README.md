@@ -8,6 +8,8 @@ Languages (frontend) used: HTML, CSS, Javascript, SQL
 
 ------------------------------------
 
+SECTION: 2BSCS-!
+
 
 PROJECT ROLES
 - Scrum Master: Zyrian Ian Acorda
