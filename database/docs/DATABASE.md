@@ -35,6 +35,8 @@ Each table also has an `_active` view (for example, `employee_active`) that show
 | `department_headcount` | Number of employees and total salary per department | 06 |
 | `admin_link_employee()`, `app_user_employee` | Links a user account to an employee record | 06 |
 | `price_on(product, date)` | Price of a product on a given date | 07 |
+| `price_history_of(product)` | All prices of a product, with the date each price was valid until | 10 |
+| `product_active_price` | Active products with their current price | 09 |
 | `sales_line_amount`, `sales_total` | Amount of each line item and total of each sale | 07 |
 | `payment_balance`, `customer_balance` | Amount paid and remaining balance per sale and per customer | 07 |
 | `report_...()` | Seven reports: Product Master List, Active Employees, All Employees, Employee Job History, Top Customers, Top Products, and Top Sales | 07 |
@@ -54,9 +56,10 @@ Each table also has an `_active` view (for example, `employee_active`) that show
 4. **Viewing records** – Row Level Security (RLS) is enabled on every table. Users can only see records they have a view right for.
 5. **Changing records** – A trigger checks the user's add, edit, or delete right on every change. This means the database blocks the action even if the button is not hidden on the website.
 6. **Deleting records** – Permanent deletes are blocked. A record cannot be deleted while it is still used by another active record (for example, a customer that still has sales).
-7. **Job history** – An employee cannot have two job changes on the same date, and the date cannot be before the hire date or after the separation date.
-8. **Audit log** – Every add, edit, delete, and restore is saved in the audit log together with the username of the person who made the change.
-9. **Superadmin protection** – The last active superadmin cannot be removed, blocked, or changed to another role.
+7. **Validation** – Pay term must be COD, 30D, or 45D, and unit must be pc, ea, mtr, pkg, or ltr. Customer names and product descriptions cannot be blank.
+8. **Job history** – An employee cannot have two job changes on the same date, and the date cannot be before the hire date or after the separation date.
+9. **Audit log** – Every add, edit, delete, and restore is saved in the audit log together with the username of the person who made the change.
+10. **Superadmin protection** – The last active superadmin cannot be removed, blocked, or changed to another role.
 
 ## 5. Indexes
 
@@ -87,7 +90,8 @@ so they are safe to run on the live database.
 | `check_sales_delete.sql` | Sales with items or payments, and customers or products in use, cannot be deleted | 7/7 PASS |
 | `test_reports.sql` | Sales totals, balances, reports, and audit log search are correct | 13/13 PASS |
 | `check_search_speed.sql` | Search indexes are used and searches are fast | 9/9 PASS |
-| **Total** | | **53/53 PASS** |
+| `check_customer_product_rules.sql` | Pay term, unit, and blank-name rules; product price view and price history | 7/7 PASS |
+| **Total** | | **60/60 PASS** |
 
 ## 7. Final Review Checklist
 
@@ -97,5 +101,5 @@ so they are safe to run on the live database.
 - [x] The rebuild was repeated to confirm that the scripts can be run again
 - [x] The backup was restored and the record counts were checked (82 customers, 32 employees, 57 products, 124 sales, 165 payments)
 - [x] No passwords or secret keys are stored in the repository
-- [x] `dist/hope-all-in-one.sql` is up to date
+- [x] `dist/hope-inc.sql` (full database file) is up to date
 - [ ] The rights list (41) has been compared with the course guide (36)
