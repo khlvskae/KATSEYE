@@ -17,6 +17,7 @@ PROJECT ROLES
   //Manages the database by building the tables, seed data, views, queries, and constraints, and by handling indexes, audit logging, and backup and restore.
 
 - UI/UX Designer: Ashley Nicole Dobles
+  //Designs how the system looks and feels through the design system, wireframes, and mockups, then hands them to the developer and checks the built screens for usability.
 
 - Developer: Norminah Pampa
 
