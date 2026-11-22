@@ -15,6 +15,7 @@ export const ALL_PERMS = {
   'reports.empJobHistory': 'Employee Job History', 'reports.topSales': 'Top Sales',
 };
 
+// Groups permissions by feature module for role assignment and UI rendering.
 export const PERM_GROUPS = [
   { key: 'customers', label: 'Customer Management', view: 'customers.view', items: ['customers.add', 'customers.edit', 'customers.delete'] },
   { key: 'products', label: 'Product Management', view: 'products.view',
