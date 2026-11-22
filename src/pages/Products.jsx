@@ -34,7 +34,7 @@ export default function Products() {
         <table className="data-table">
           <thead><tr><th>Code</th><th>Description</th><th>Unit</th><th className="money">Current Price</th><th>Status</th><th>Stamp</th><th>Actions</th></tr></thead>
           <tbody>
-            {sorted.length === 0 && <EmptyRow cols={7}>{search ? 'No products match your search. Try a different code or description.' : 'No products here.'}</EmptyRow>}
+            {sorted.length === 0 && <EmptyRow cols={7}>{search ? 'No products match your search.' : 'No products here.'}</EmptyRow>}
             {sorted.map(p => {
               const current = priceOn(prices, p.prodCode, todayISO());
               return (
@@ -63,7 +63,7 @@ export default function Products() {
       {historyFor && <PriceHistory product={historyFor} onClose={() => setHistoryFor(null)} />}
       {confirm && (
         <ConfirmModal title="Delete product?" onClose={() => setConfirm(null)}
-          message={`${confirm.prodCode} · ${confirm.description} will be moved to the Deleted tab. A product that has active sales lines or prices cannot be deleted.`}
+          message={`${confirm.prodCode} · ${confirm.description} will be moved to the Deleted tab. A product with active sales lines or prices cannot be deleted.`}
           onConfirm={() => setDeleted('products', confirm, true)} />
       )}
     </>
@@ -141,7 +141,7 @@ function PriceHistory({ product, onClose }) {
         <table className="data-table">
           <thead><tr><th>Effective Date</th><th className="money">Unit Price</th><th>Status</th><th>Stamp</th><th>Actions</th></tr></thead>
           <tbody>
-            {rows.length === 0 && <EmptyRow cols={5}>No prices here yet.</EmptyRow>}
+            {rows.length === 0 && <EmptyRow cols={5}>No prices here.</EmptyRow>}
             {rows.map(p => (
               <tr key={p.effDate} className={p.isDeleted ? 'deleted-row' : ''}>
                 <td><strong>{p.effDate}</strong></td>
