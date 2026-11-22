@@ -1,4 +1,5 @@
 // Rights catalogue. Must match the "rights" table in hope-inc-database.sql.
+// Permission keys and groups for role-based access checks across modules.
 export const ALL_PERMS = {
   'customers.view': 'View Customers', 'customers.add': 'Add Customer', 'customers.edit': 'Edit Customer', 'customers.delete': 'Delete Customer',
   'products.view': 'View Products', 'products.add': 'Add Product', 'products.edit': 'Edit Product', 'products.delete': 'Delete Product',
