@@ -34,7 +34,7 @@ export default function Products() {
         <table className="data-table">
           <thead><tr><th>Code</th><th>Description</th><th>Unit</th><th className="money">Current Price</th><th>Status</th><th>Stamp</th><th>Actions</th></tr></thead>
           <tbody>
-            {sorted.length === 0 && <EmptyRow cols={7}>{search ? 'No products match your search. Try a different code or description.' : 'No products here.'}</EmptyRow>}
+            {sorted.length === 0 && <EmptyRow cols={7}>{search ? 'No products match your search.' : 'No products here.'}</EmptyRow>}
             {sorted.map(p => {
               const current = priceOn(prices, p.prodCode, todayISO());
               return (
