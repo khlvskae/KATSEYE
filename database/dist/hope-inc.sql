@@ -2188,6 +2188,39 @@ SELECT t.email, COALESCE(u.role, 'not invited yet') AS role, u.status
   LEFT JOIN app_user u ON u.email = t.email
  ORDER BY u.role DESC NULLS LAST, t.email;
 
+SET app.username = 'demo-data';
+
+INSERT INTO customer (custno, custname, address, payterm) VALUES
+    ('C9001', 'Laguna Tech Supply', '12 Rizal St, Sta. Cruz, Laguna', 'COD'),
+    ('C9002', 'Manila Office Hub', '88 Taft Ave, Manila', '30D'),
+    ('C9003', 'QC Computer Center', '45 Katipunan Ave, Quezon City', '45D'),
+    ('C9004', 'Bay Area Printing', '310 Roxas Blvd, Pasay City', '30D'),
+    ('C9005', 'Juan dela Cruz', '7 Mabini St, Calamba, Laguna', 'COD')
+ON CONFLICT (custno) DO NOTHING;
+
+INSERT INTO product (prodcode, description, unit) VALUES
+    ('DM0001', 'Logitech Wireless Mouse', 'ea'),
+    ('DM0002', 'A4 Bond Paper 500 sheets', 'pkg'),
+    ('DM0003', 'Cat6 LAN Cable', 'mtr'),
+    ('DM0004', 'HDMI Cable 2m', 'pc'),
+    ('DM0005', 'Printer Ink Black', 'ltr')
+ON CONFLICT (prodcode) DO NOTHING;
+
+INSERT INTO pricehist (effdate, prodcode, unitprice) VALUES
+    ('2024-01-01', 'DM0001', 15.00),
+    ('2025-06-01', 'DM0001', 17.50),
+    ('2024-01-01', 'DM0002', 4.25),
+    ('2025-06-01', 'DM0002', 4.75),
+    ('2024-01-01', 'DM0003', 1.20),
+    ('2025-06-01', 'DM0003', 1.35),
+    ('2024-01-01', 'DM0004', 6.00),
+    ('2025-06-01', 'DM0004', 5.50),
+    ('2024-01-01', 'DM0005', 22.00),
+    ('2025-06-01', 'DM0005', 24.00)
+ON CONFLICT (effdate, prodcode) DO NOTHING;
+
+RESET app.username;
+
 SELECT (SELECT COUNT(*) FROM customer) AS customers,
        (SELECT COUNT(*) FROM product) AS products,
        (SELECT COUNT(*) FROM employee) AS employees,
