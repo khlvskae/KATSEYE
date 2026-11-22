@@ -23,6 +23,7 @@ PROJECT ROLES
   //Builds the application itself, including login, user management, the Customer, Product, HR, and Sales modules, the reports, and the permission checks.
 
 - Tester: Ylthea Dawn Villanueva
+  //Makes sure the system works by writing test plans and test cases, checking permissions and regressions, and reporting and verifying bugs.
 
 project board sample:
 https://canva.link/6dewjzx0oaw1bl6
