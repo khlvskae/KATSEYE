@@ -2155,11 +2155,6 @@ SELECT t.email, COALESCE(u.role, 'not invited yet') AS role, u.status
   LEFT JOIN app_user u ON u.email = t.email
  ORDER BY u.role DESC NULLS LAST, t.email;
 
-SELECT empno, firstname, lastname, jobdesc, deptname, salary, job_since, is_employed
-  FROM employee_current_job
- WHERE empno IN ('00065', '00067', '00069', '00071', '00073')
- ORDER BY empno;
-
 SELECT (SELECT COUNT(*) FROM customer) AS customers,
        (SELECT COUNT(*) FROM product) AS products,
        (SELECT COUNT(*) FROM employee) AS employees,
