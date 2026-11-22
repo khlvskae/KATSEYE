@@ -9,8 +9,9 @@ Languages (frontend) used: HTML, CSS, Javascript
 ------------------------------------
 
 
-P R O J E C T    R O L E S
+PROJECT ROLES
 - Scrum Master: Zyrian Ian Acorda
+  Manages the whole flow of the project with the help of the members.
 
 - DB Admin: Khrisz Alessandra Cortez
 
